@@ -1,35 +1,64 @@
-<script>
-    function sendParameters() {
-        const f0up_key = document.getElementById('f0up_key').value;
-        const filter_radius = document.getElementById('filter_radius').value;
-        const index_rate = document.getElementById('index_rate').value;
-        const rms_mix_rate = document.getElementById('rms_mix_rate').value;
-        const protect = document.getElementById('protect').value;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjust Parameters</title>
+</head>
+<body>
+    <h2>Adjust Parameters</h2>
 
-        const parameters = {
-            f0up_key,
-            filter_radius,
-            index_rate,
-            rms_mix_rate,
-            protect
-        };
+    <label for="f0up_key">f0up_key:</label>
+    <input type="range" id="f0up_key" min="-24" max="24" step="0.1" value="0"><br>
 
-        console.log('Sending parameters:', parameters);
+    <label for="filter_radius">filter_radius:</label>
+    <input type="range" id="filter_radius" min="0" max="7" step="0.1" value="3"><br>
 
-        // Send parameters to the local server
-        fetch('http://localhost:5000/infer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(parameters)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Server response:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
+    <label for="index_rate">index_rate:</label>
+    <input type="range" id="index_rate" min="0" max="1" step="0.1" value="0.75"><br>
+
+    <label for="rms_mix_rate">rms_mix_rate:</label>
+    <input type="range" id="rms_mix_rate" min="0" max="1" step="0.1" value="0.5"><br>
+
+    <label for="protect">protect:</label>
+    <input type="range" id="protect" min="0" max="0.5" step="0.001" value="0.111"><br>
+
+    <button onclick="sendParameters()">Submit</button>
+
+    <script>
+        function sendParameters() {
+            const f0up_key = document.getElementById('f0up_key').value;
+            const filter_radius = document.getElementById('filter_radius').value;
+            const index_rate = document.getElementById('index_rate').value;
+            const rms_mix_rate = document.getElementById('rms_mix_rate').value;
+            const protect = document.getElementById('protect').value;
+
+            const parameters = {
+                f0up_key: parseFloat(f0up_key),
+                filter_radius: parseFloat(filter_radius),
+                index_rate: parseFloat(index_rate),
+                rms_mix_rate: parseFloat(rms_mix_rate),
+                protect: parseFloat(protect)
+            };
+
+            console.log('Sending parameters:', parameters);
+
+            // Send parameters to the local server
+            fetch('http://localhost:5000/infer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(parameters)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
