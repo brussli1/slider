@@ -23,23 +23,9 @@
     <input type="range" id="protect" min="0" max="1" step="0.01" value="0.455"><br>
 
     <button onclick="sendParameters()">Submit</button>
-    <button onclick="sendTestMessage()">Send Test Message</button>
 
     <script>
-        // Check if Telegram.WebApp is defined
-        if (typeof Telegram === 'undefined' || typeof Telegram.WebApp === 'undefined') {
-            alert('Telegram WebApp is not defined. Make sure you are running this inside Telegram.');
-        } else {
-            console.log('Telegram WebApp is defined.');
-        }
-
         function sendParameters() {
-            if (typeof Telegram === 'undefined' || typeof Telegram.WebApp === 'undefined') {
-                console.error('Telegram WebApp is not defined.');
-                alert('Telegram WebApp is not defined. Make sure you are running this inside Telegram.');
-                return;
-            }
-
             const f0up_key = document.getElementById('f0up_key').value;
             const filter_radius = document.getElementById('filter_radius').value;
             const index_rate = document.getElementById('index_rate').value;
@@ -56,23 +42,22 @@
 
             console.log('Sending parameters:', parameters);
 
-            Telegram.WebApp.sendData(JSON.stringify(parameters));
+            // Send parameters to the local server
+            fetch('http://localhost:5000/infer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(parameters)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
-
-        function sendTestMessage() {
-            if (typeof Telegram === 'undefined' || typeof Telegram.WebApp === 'undefined') {
-                console.error('Telegram WebApp is not defined.');
-                alert('Telegram WebApp is not defined. Make sure you are running this inside Telegram.');
-                return;
-            }
-
-            const testMessage = 'Test message from the web app!';
-            Telegram.WebApp.sendData(testMessage);
-            console.log('Sending test message:', testMessage);
-        }
-
-        // Mark WebApp as ready
-        Telegram.WebApp.ready();
     </script>
 </body>
 </html>
