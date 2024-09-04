@@ -26,6 +26,13 @@
 
     <script>
         function sendParameters() {
+            // Ensure Telegram WebApp is loaded
+            if (typeof Telegram === 'undefined' || typeof Telegram.WebApp === 'undefined') {
+                console.error('Telegram WebApp is not defined.');
+                alert('Telegram WebApp is not defined. Make sure you are running this inside Telegram.');
+                return;
+            }
+
             const f0up_key = document.getElementById('f0up_key').value;
             const filter_radius = document.getElementById('filter_radius').value;
             const index_rate = document.getElementById('index_rate').value;
@@ -40,10 +47,13 @@
                 protect
             };
 
+            console.log('Sending parameters:', parameters);
+
             // Send parameters back to the bot
             Telegram.WebApp.sendData(JSON.stringify(parameters));
         }
 
+        // Mark WebApp as ready
         Telegram.WebApp.ready();
     </script>
 </body>
