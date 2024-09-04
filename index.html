@@ -63,17 +63,17 @@
     <div class="parameter">
         <label for="f0up_key">Pitch:</label>
         <div class="slider-container">
-            <input type="range" id="f0up_key" min="-24" max="24" step="1" value="0" oninput="updateValue('f0up_key')">
-            <span class="value-display" id="f0up_key_value">0</span>
+            <input type="range" id="f0up_key" min="-24" max="24" step="1" value="-2" oninput="updateValue('f0up_key')">
+            <span class="value-display" id="f0up_key_value">-2</span>
         </div>
-        <input type="number" id="f0up_key_input" min="-24" max="24" step="1" value="0" oninput="updateSlider('f0up_key')">
+        <input type="number" id="f0up_key_input" min="-24" max="24" step="1" value="-2" oninput="updateSlider('f0up_key')">
     </div>
 
     <div class="parameter">
         <label for="filter_radius">Respiracion:</label>
         <div class="slider-container">
             <input type="range" id="filter_radius" min="0" max="7" step="1" value="3" oninput="updateValue('filter_radius')">
-            <span class="value-display" id="filter_radius_value">3</span>
+            <span class="value-display" id="filter_radius_value">7</span>
         </div>
         <input type="number" id="filter_radius_input" min="0" max="7" step="1" value="3" oninput="updateSlider('filter_radius')">
     </div>
