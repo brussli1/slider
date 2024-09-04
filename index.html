@@ -90,19 +90,19 @@
     <div class="parameter">
         <label for="rms_mix_rate">Volumen:</label>
         <div class="slider-container">
-            <input type="range" id="rms_mix_rate" min="0" max="1" step="0.01" value="0.5" oninput="updateValue('rms_mix_rate')">
-            <span class="value-display" id="rms_mix_rate_value">0.5</span>
+            <input type="range" id="rms_mix_rate" min="0" max="1" step="0.01" value="1" oninput="updateValue('rms_mix_rate')">
+            <span class="value-display" id="rms_mix_rate_value">1</span>
         </div>
-        <input type="number" id="rms_mix_rate_input" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider('rms_mix_rate')">
+        <input type="number" id="rms_mix_rate_input" min="0" max="1" step="0.01" value="1" oninput="updateSlider('rms_mix_rate')">
     </div>
 
     <div class="parameter">
         <label for="protect">Proteccion:</label>
         <div class="slider-container">
-            <input type="range" id="protect" min="0" max="0.5" step="0.001" value="0.111" oninput="updateValue('protect')">
+            <input type="range" id="protect" min="0" max="0.5" step="0.001" value="0.5" oninput="updateValue('protect')">
             <span class="value-display" id="protect_value">0.111</span>
         </div>
-        <input type="number" id="protect_input" min="0" max="0.5" step="0.001" value="0.111" oninput="updateSlider('protect')">
+        <input type="number" id="protect_input" min="0" max="0.5" step="0.001" value="0.5" oninput="updateSlider('protect')">
     </div>
 
     <button id="submit_button" onclick="sendParameters()" disabled>Submit</button>
